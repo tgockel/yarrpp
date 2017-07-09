@@ -6,11 +6,18 @@ include_directories(src)
 file(GLOB_RECURSE yarrpp_cpps RELATIVE_PATH "." "src/yarr/*.cpp")
 add_library(yarrpp ${yarrpp_cpps})
 
-find_package(GTest REQUIRED)
+find_package(GTest)
 
 file(GLOB_RECURSE test_cpps RELATIVE_PATH "." "src/yarr_tests/*.cpp")
 add_executable(yarrpp_tests ${test_cpps})
-target_link_libraries(yarrpp_tests yarrpp GTest::GTest GTest::Main)
+target_link_libraries(yarrpp_tests yarrpp)
+
+if(GTest_FOUND)
+  target_link_libraries(yarrpp_tests GTest::GTest GTest::Main)
+else()
+  message(WARNING "GTest was not found through search, but we are attempting to link to it anyway.")
+  target_link_libraries(yarrpp_tests -lgtest -lgtest_main -pthread)
+endif()
 
 # CMake wants to reserve the "test" target for their awful CTest utility, so turn that off.
 cmake_policy(SET CMP0037 OLD)
