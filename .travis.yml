@@ -6,6 +6,7 @@ env:
 before_install:
 - sudo apt-add-repository --yes ppa:ubuntu-toolchain-r/test
 - sudo add-apt-repository --yes ppa:libreoffice/ppa
+- sudo add-apt-repository --yes ppa:george-edison55/cmake-3.x
 - sudo apt-get update
 install:
 - sudo apt-get install --yes --force-yes cmake g++-6;
