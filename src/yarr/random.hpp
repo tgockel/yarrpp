@@ -3,6 +3,8 @@
  *
  *  \see http://www.gockelhut.com/cpp-pirate/random-seed.html
 **/
+#pragma once
+
 #include <yarr/config.hpp>
 
 #include <cstdint>
