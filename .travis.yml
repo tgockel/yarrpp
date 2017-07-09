@@ -10,9 +10,9 @@ before_install:
 - sudo add-apt-repository --yes ppa:libreoffice/ppa
 - sudo add-apt-repository --yes ppa:andykimpe/cmake3
 - sudo apt-get update
-- if [[ ${COVERAGE} -eq 1 ]]; then sudo pip install cpp-coveralls pyyaml; fi
 install:
-- sudo apt-get install --yes --force-yes cmake3 g++-6 libgtest-dev
+- sudo apt-get install --yes --force-yes cmake3 g++-6 libgtest-dev lcov
+- if [[ ${COVERAGE} -eq 1 ]]; then sudo pip install cpp-coveralls pyyaml; fi
 script:
 - "${COMPILER} --version"
 - cmake -DCMAKE_CXX_COMPILER=${COMPILER} -DCMAKE_BUILD_TYPE=${CONF} -DCOVERAGE=${COVERAGE}
