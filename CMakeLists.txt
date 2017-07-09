@@ -14,9 +14,12 @@ target_link_libraries(yarrpp_tests yarrpp)
 
 if(GTest_FOUND)
   target_link_libraries(yarrpp_tests GTest::GTest GTest::Main)
+elseif(EXISTS "/usr/src/gtest/CMakeLists.txt")
+  message(STATUS "GTest is not installed, but the sources were found...installing from CMakeLists")
+  include("/usr/src/gtest")
+  target_link_libraries(yarrpp_tests gtest gtest_main)
 else()
-  message(WARNING "GTest was not found through search, but we are attempting to link to it anyway.")
-  target_link_libraries(yarrpp_tests -lgtest -lgtest_main -pthread)
+  message(SEND_ERROR "GTest was not found")
 endif()
 
 # CMake wants to reserve the "test" target for their awful CTest utility, so turn that off.
