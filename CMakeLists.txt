@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.0)
 project(yarrpp)
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/")
+
 include_directories(src)
 
 file(GLOB_RECURSE yarrpp_cpps RELATIVE_PATH "." "src/yarr/*.cpp")
@@ -35,3 +37,9 @@ add_custom_target(test
                   DEPENDS yarrpp_tests
                   USES_TERMINAL
                  )
+
+if(COVERAGE)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
+  include(CodeCoverage)
+  setup_target_for_coverage(test-coverage yarrpp_tests coverage)
+endif()
