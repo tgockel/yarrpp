@@ -6,9 +6,10 @@ env:
 before_install:
 - sudo apt-add-repository --yes ppa:ubuntu-toolchain-r/test
 - sudo add-apt-repository --yes ppa:libreoffice/ppa
+- sudo add-apt-repository --yes ppa:andykimpe/cmake3
 - sudo apt-get update
 install:
-- sudo apt-get install --yes --force-yes cmake g++-6;
+- sudo apt-get install --yes --force-yes cmake3 g++-6;
 script:
 - "${COMPILER} --version"
 - cmake -DCMAKE_CXX_COMPILER=${COMPILER} -DCMAKE_BUILD_TYPE=${CONF} -DCOVERAGE=${COVERAGE}
