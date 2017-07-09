@@ -19,6 +19,9 @@ elseif(EXISTS "/usr/src/gtest/src/")
   message(STATUS "GTest is not installed, but the sources were found...adding them to the build")
   file(GLOB gtest_cpps "/usr/src/gtest/src/*.cc")
   message(STATUS "gtest_cpps=${gtest_cpps}")
+  # The Oh So Wise Creators of GTest don't understand the concept of relative imports, so make sure to add it to the
+  # include path, which is totally reasonable.
+  include_directories("/usr/src/gtest")
   add_library(gtest_all ${gtest_cpps})
   target_link_libraries(yarrpp_tests gtest_all -pthread)
 else()
